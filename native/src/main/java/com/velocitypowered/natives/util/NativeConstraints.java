@@ -47,6 +47,10 @@ public class NativeConstraints {
 
   static final BooleanSupplier NATIVE_BASE = () -> NATIVES_ENABLED && CAN_GET_MEMORYADDRESS;
 
+  static final BooleanSupplier FREEBSD_X86_64 = () -> NATIVE_BASE.getAsBoolean()
+      && System.getProperty("os.name", "").equalsIgnoreCase("FreeBSD")
+      && IS_AMD64;
+
   static final BooleanSupplier LINUX_X86_64 = () -> NATIVE_BASE.getAsBoolean()
       && System.getProperty("os.name", "").equalsIgnoreCase("Linux")
       && IS_AMD64;

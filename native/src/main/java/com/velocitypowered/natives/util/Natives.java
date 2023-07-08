@@ -80,6 +80,10 @@ public class Natives {
 
   public static final NativeCodeLoader<VelocityCompressorFactory> compress = new NativeCodeLoader<>(
       ImmutableList.of(
+          new NativeCodeLoader.Variant<>(NativeConstraints.FREEBSD_X86_64,
+              copyAndLoadNative("/freebsd_x86_64/velocity-compress.so"),
+              "libdeflate (FreeBSD x86_64)",
+              LibdeflateVelocityCompressor.FACTORY), // compiled with FreeBSD 13
           new NativeCodeLoader.Variant<>(NativeConstraints.LINUX_X86_64,
               copyAndLoadNative("/linux_x86_64/velocity-compress.so"),
               "libdeflate (Linux x86_64)",
@@ -99,6 +103,9 @@ public class Natives {
 
   public static final NativeCodeLoader<VelocityCipherFactory> cipher = new NativeCodeLoader<>(
       ImmutableList.of(
+          new NativeCodeLoader.Variant<>(NativeConstraints.FREEBSD_X86_64,
+              copyAndLoadNative("/freebsd_x86_64/velocity-cipher.so"), // FreeBSD
+              "OpenSSL local (FreeBSD x86_64)", NativeVelocityCipher.FACTORY),
           new NativeCodeLoader.Variant<>(NativeConstraints.LINUX_X86_64,
               copyAndLoadNative("/linux_x86_64/velocity-cipher.so"), // Any local version
               "OpenSSL local (Linux x86_64)", NativeVelocityCipher.FACTORY),

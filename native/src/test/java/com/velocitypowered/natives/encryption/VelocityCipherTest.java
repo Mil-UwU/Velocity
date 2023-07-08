@@ -20,6 +20,7 @@ package com.velocitypowered.natives.encryption;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.condition.OS.LINUX;
+import static org.junit.jupiter.api.condition.OS.FREEBSD;
 
 import com.velocitypowered.natives.util.Natives;
 import io.netty.buffer.ByteBuf;
@@ -45,6 +46,16 @@ class VelocityCipherTest {
     Random random = new Random(1);
     random.nextBytes(TEST_DATA);
     random.nextBytes(AES_KEY);
+  }
+
+  @Test
+  @EnabledOnOs({FREEBSD})
+  void nativeIntegrityCheck() throws GeneralSecurityException {
+    VelocityCipherFactory factory = Natives.cipher.get();
+    if (factory == JavaVelocityCipher.FACTORY) {
+      fail("Loaded regular cipher");
+    }
+    check(factory, Unpooled::directBuffer);
   }
 
   @Test
