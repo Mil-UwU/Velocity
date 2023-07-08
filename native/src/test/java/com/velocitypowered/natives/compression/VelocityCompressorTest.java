@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.condition.OS.LINUX;
-import static org.junit.jupiter.api.condition.OS.FREEBSD;
 
 import com.velocitypowered.natives.util.BufferPreference;
 import com.velocitypowered.natives.util.Natives;
@@ -45,23 +44,6 @@ class VelocityCompressorTest {
   static void checkNatives() throws IOException {
     Natives.compress.getLoadedVariant();
     new Random(1).nextBytes(TEST_DATA);
-  }
-
-  @Test
-  @EnabledOnOs({FREEBSD})
-  void sanityCheckNative() {
-    assertThrows(IllegalArgumentException.class, () -> Natives.compress.get().create(-42));
-  }
-
-  @Test
-  @EnabledOnOs({FREEBSD})
-  void nativeIntegrityCheck() throws DataFormatException {
-    VelocityCompressor compressor = Natives.compress.get().create(Deflater.DEFAULT_COMPRESSION);
-    if (compressor.preferredBufferType() != BufferPreference.DIRECT_REQUIRED) {
-      compressor.close();
-      fail("Loaded regular compressor");
-    }
-    check(compressor, () -> Unpooled.directBuffer(TEST_DATA.length + 32));
   }
 
   @Test
