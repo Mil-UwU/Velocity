@@ -28,6 +28,7 @@ public class NativeConstraints {
   private static final boolean NATIVES_ENABLED = !Boolean.getBoolean("velocity.natives-disabled");
   private static final boolean IS_AMD64;
   private static final boolean IS_AARCH64;
+  private static final boolean IS_I386;
   private static final boolean CAN_GET_MEMORYADDRESS;
 
   static {
@@ -43,9 +44,15 @@ public class NativeConstraints {
     // give amd64.
     IS_AMD64 = osArch.equals("amd64") || osArch.equals("x86_64");
     IS_AARCH64 = osArch.equals("aarch64") || osArch.equals("arm64");
+    // Add i386
+    IS_I386 = osArch.equals("i386")
   }
 
   static final BooleanSupplier NATIVE_BASE = () -> NATIVES_ENABLED && CAN_GET_MEMORYADDRESS;
+
+  static final BooleanSupplier FREEBSD_I386 = () -> NATIVE_BASE.getAsBoolean()
+      && System.getProperty("os.name", "").equalsIgnoreCase("FreeBSD")
+      && IS_I386;
 
   static final BooleanSupplier FREEBSD_X86_64 = () -> NATIVE_BASE.getAsBoolean()
       && System.getProperty("os.name", "").equalsIgnoreCase("FreeBSD")
