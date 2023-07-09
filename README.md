@@ -7,11 +7,11 @@ machines to serve as a proxy.
 
 ## Done
 
-* FreeBSD amd64
+* FreeBSD amd64, i386
 
 ## Plans in no particular order
 
-* FreeBSD i386
+* FreeBSD ppc64
 * Linux i386, ppc64, sparc64, armhf
 
 ## Things I would like to add, but have no access to hardware
