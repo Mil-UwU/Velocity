@@ -45,7 +45,7 @@ public class NativeConstraints {
     IS_AMD64 = osArch.equals("amd64") || osArch.equals("x86_64");
     IS_AARCH64 = osArch.equals("aarch64") || osArch.equals("arm64");
     // Add i386
-    IS_I386 = osArch.equals("i386")
+    IS_I386 = osArch.equals("i386");
   }
 
   static final BooleanSupplier NATIVE_BASE = () -> NATIVES_ENABLED && CAN_GET_MEMORYADDRESS;
