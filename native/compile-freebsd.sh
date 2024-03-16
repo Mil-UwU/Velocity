@@ -9,7 +9,7 @@ fi
 
 if [ ! -d libdeflate ]; then
   echo "Cloning libdeflate..."
-  git clone https://github.com/Mil-UwU/libdeflate.git
+  git clone https://github.com/kinzaye/libdeflate.git
 fi
 
 echo "Compiling libdeflate..."
