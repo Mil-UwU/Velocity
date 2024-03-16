@@ -1,4 +1,4 @@
-# *This fork adds FreeBSD i386 and amd64 natives support to FreeBSD.*
+# *This fork adds FreeBSD i386 and amd64 natives support to Velocity.*
 
 # Velocity
 
